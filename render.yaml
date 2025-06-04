@@ -1,0 +1,19 @@
+databases:
+- name: sliver-db
+  databaseName: sliver
+  user: user
+  plan: free
+
+services:
+- type: web
+  name: sliver-host
+  env: python
+  buildCommand: pip install -r requirements.txt
+  startCommand: python app.py
+  envVars:
+  - key: PORT
+    value: 10000
+  disk:
+    name: sliver-disk
+    mountPath: /opt/render/project/src
+    sizeGB: 1
